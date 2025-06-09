@@ -1,0 +1,81 @@
+ES6 aka ES2015 concepts:
+
+Var hositing and functional scope:
+
+var variable has functional scope and it can be accessible in any place of the functional scope and var is javascript hosited.
+
+function greetings(name) {
+  if (name === 'chandler') {
+    greet = 'Hello Chandler';
+  } else {
+    greet = 'Hi there';
+  }
+  console.log(greet);
+}
+var greet;
+greetings('chandler');
+
+//var can be accesible in any of the functional scope.
+
+Because of hoisitng and functional scope var keyword is quite tricky, in es6 they have introduced let and const keyword.
+
+let keyword:
+
+let keyword introduced in the ES6 and it's block scope.
+let keyword is not hosited.
+
+ex:     function greetings(name) {
+        let greet;
+        if (name === 'chandler') {
+           greet = 'Hello Chandler';
+        } else {
+           greet = 'Hi there';
+        }
+        console.log(greet);
+      }
+      greetings('chandler');
+
+      var a = 10
+      var b = 20
+      if (a === 10) {
+        var a = 1
+        let b = 2
+
+        console.log(a) // 1
+        console.log(b) //2  
+      }
+      console.log(a) // 1
+      console.log(b) // 20
+
+let keyword is not redeclarable:
+
+ex: let a = 1
+let a = 2 // this will provide an error
+a = 2 // this will not provide an error
+
+const keyword:
+
+const keyword must be initialized
+const keyword is not redeclarable and values are reassignable
+const keyword can add new value in object or array.
+
+const obj1 = {
+    name: 'Diwakar',
+  };
+  console.log(obj1.name);
+
+  obj1.age = '32';
+  console.log(obj1.age);
+
+arrow function:
+
+Arrow function is ES6 to create short and concise syntax.
+
+var getRegValue = function () {
+    return 10;
+  };
+  console.log(getRegValue());
+
+  const getArrowFunction = (m) => 10 * m;
+
+  console.log(getArrowFunction(5));

@@ -1,0 +1,384 @@
+Async Javascript:
+
+Topics to cover 
+* Timeout and Intervals
+* Callbacks
+* Promises
+* async await
+* event loop
+
+Asyn Javascript - What and Why?
+In most basic form,
+Javascript is a synchronous, blocking, single-threaded language.
+
+Synchronous:
+If we have two function which logs messages to the console, code executes from top to bottom, with only one executing at any given time.
+
+Blocking:
+No matter how long a previous process takes, the subsequent processes won't kick off until the former is completed.
+If function A had to execute intenside chunk a code, Javascript has to finish the function A and then only it will execute the function B. Even if the code takes 10 sec or 1 minute.
+
+Single Threaded:
+A thread is simply a process that your javascript program can use to run a task.
+Each thread can only do one task at a time.
+Since javascript is single threaded called the main thread for exececuting any code.
+
+So due to the above reasons, we need a way to have async behavior with javascript.
+
+Async Javascript - How?
+* Just javascript is not enough.
+* To help us write async javascript code we need to web browsers to execute.
+* Web browsers defined API and function that allows us to register function that should not be executed sync, and should be invoked async when some kind of event occurs.
+* Example: that could be the passage of time(setInterval and setTimeout), the user's interaction with the mouse(addEventListener) or the arrival of data over the network(callbacks, promises, async-await).
+* Which means we can do several actions at the same time without stopping or blocking the main thread.
+
+Timeouts & Intervals:
+
+The traditional method Javascript has available for running code async - 
+
+* after a set time period elapsed or setTimout()
+* at regular intervals of time or setInterval()
+or 
+setTimout():
+The setTimeout function executes particular block of code once after a specific time has elapsed.
+ex:
+syntax: setTimeout(function, duration, param1, parms2....)
+* The first param is a function to run, or a reference of function defined elsewhere
+* The second paramter is a number representing the duration in milliseconds to wait before executing the code.
+* After second paramter, we can pass zero or more values.
+
+ex:function greet() {
+    console.log('Hello');
+    }
+    setTimeout(greet, 2000);
+      // hello will be printed after 2 seconds in the console
+
+    function greet(name) {
+      console.log(`Hello ${name}`);
+    }
+  setTimeout(greet, 2000, 'Diwakar'); // Hello Diwakar will printed after 2 seconds while passing params
+
+To clear a timeout we can use "clearTimeout()" method.
+
+ function greet(name) {
+      console.log(`Hello ${name}`);
+    }
+  const clearTimeoutId = setTimeout(greet, 2000, 'Diwakar');
+  clearTimeout(clearTimoutId); // nothing prints in the console.
+
+setInterval():
+
+The setInterval() function repeatedly runs the same code over and over again at regular intervals.
+syntax:
+setInterval(function, duration, params1, params2...)
+
+ex: function greet() {
+  console.log("Hello")
+}
+
+setInterval(greet, 2000); every 2 seconds Hello will be printed in the console
+
+To clear this we need to use the clearInterval function to clear the setInterval.
+
+ex :function greet() {
+  console.log("Hello")
+}
+
+const intervalId = setInterval(greet, 2000);
+clearInterval(intervalId);
+
+Noteworthy points:
+
+It is possible to achieve the same effect as setInterval with a recursive setTimeout.
+
+setTimeout(function run(){
+  console.log("Hello)
+  setTimeout(run, 100)
+}, 100) // recursive Timeout
+
+1. duration is guaranteed between the executions.
+Irrespective of how long the code takes to run, the interval remains the same.
+
+Callbacks:
+
+In Javascript, functions are first class objects.
+Just like an object, function can also passed as an arugment to function.
+A function can also returned as values from another function.
+
+ function greet(name) {
+    console.log(`Hello ${name}`);
+  }
+
+  function higherOrderFunction(callback) {
+    const name = 'Diwakar';
+    callback(name);
+  }
+
+  higherOrderFunction(greet);
+
+  * A function that passed as an arugment to another function is called callback function. In the above example greet is the callback function.
+
+  * A function that accepts function as an arugument or returns a function is called higherOrderFunction.
+
+Why callbacks?
+
+Sync vs async callbacks:
+
+The callbacks will executed immediately is called sync callbacks.
+
+Ex: metioned in the greet function
+
+async callbacks:
+
+Callback function are used to delay the execution of function until particular time or event has occured. 
+Data fetching takes time and we can only run the function we get the fetched the data from API and not immediately.
+
+Is nothing but the setTimeout function is called async callbacks or setIntervals or any event occur to delay the function.
+
+ex: 
+function greet(){
+  console.log(`Hello`)
+}
+
+setTimeout(greet, 2000) // Here greet is a callback function, setTimeout is highter order function.
+
+callback function allow you to delay the execution of function.
+
+Problem with the callback pattern:
+
+If you have multiple callback function and each function depends on the result obtained from the preivous level, the nesting of funcion becomes too deep and it's difficult to maintain and read.
+
+ex: console.log("Start");
+
+setTimeout(() => {
+  console.log("Step 1");
+  setTimeout(() => {
+    console.log("Step 2");
+    setTimeout(() => {
+      console.log("Step 3");
+      setTimeout(() => {
+        console.log("Step 4");
+        console.log("End");
+      }, 1000);
+    }, 1000);
+  }, 1000);
+}, 1000); 
+
+The above scenario is called callback hell. Which is difficult to read, handle errors and no clean flow control.
+
+To overcome this promises was introduced in ES6.
+
+Promise:
+
+Layman understanding is about the dinner scenario:
+To get the tacos or not. Meanwhile the friend is preparing soup and waiting for the friend to msg him either to setup the table or cook some pasta i.e either the promise is fulfilled or rejected.
+
+What?
+
+A promise is a simply an object in javascript.
+
+A promise is always lies in the three state.
+
+* pending: which is initial state, neither fullfilled nor rejected.
+* fulfilled: meaning the operation is completed successfully.
+* rejected: meaning that the operation is failed
+
+Why?
+
+Promises help us deal with asyn code in a far more simpler than callbacks.
+Callback hell is avoided in the promises.
+
+  const promiseResolve = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('Brining Tacos');
+    }, 5000);
+  });
+
+  const promiseReject = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject('Not brining Tacos. Food Truct not there');
+    }, 5000);
+  });
+
+  const onFulfillment = (result) => {
+    console.log(result);
+    console.log('Set up table to eat the tacos');
+  };
+
+  const onRejection = (error) => {
+    console.log(error);
+    console.log('Cook some pasta');
+  };
+
+  promiseResolve.then(onFulfillment);
+  // output is :
+  Brining Tacos
+  Set up table to eat the tacos
+  promiseReject.catch(onRejection);
+  //output is:
+  Not brining Tacos. Food Truct not there
+  Cook some pasta
+
+function fetchData() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const success = true;
+      if (success) {
+        resolve("Data fetched successfully! 📦");
+      } else {
+        reject("Failed to fetch data ❌");
+      }
+    }, 2000);
+  });
+}
+
+// Using the promise
+console.log("Start fetching...");
+
+fetchData()
+  .then((response) => {
+    console.log("✅ Success:", response);
+  })
+  .catch((error) => {
+    console.log("❌ Error:", error);
+  })
+  .finally(() => {
+    console.log("🔚 Done.");
+  });
+
+Promise - Static Methods
+
+Promise.all()
+
+It perform multiple API's and perform some actions but executes only after all the APIs has finished the loading.
+
+const promise1 = new Promise((resolve) => {
+  setTimeout(() => resolve('First Promise Done', 1000));
+});
+
+const promise2 = new Promise((resolve) => {
+  setTimeout(() => resolve('Second Promise Done', 2000));
+});
+
+const promise3 = new Promise((resolve) => {
+  setTimeout(() => resolve('Third Promise Done', 3000));
+});
+
+Promise.all([promise1, promise2, promise3])
+  .then((results) => {
+    console.log('All Promises Resolved');
+    console.log(results);
+  })
+  .catch((error) => {
+    console.log('One of the promise is failed', error);
+  });
+
+All three promises run parallel
+Promise.all() waits all promises to be execute.
+Once all are resolved it gives you in the same order in an array and not based on the timing 
+If even one fails (rejects), the whole promise.all() fails and goes to .catch().
+
+Promise.allSettled():
+Promise.allSettled() no matter what it executes even the promises are resolved or rejected it will return the result.
+
+Promise.race():
+In the name itself it was mentioned, which promise is coming first that will be get in the output.
+
+In the above example: second promises will return first and will print first even if it's rejects as well.
+
+Async/Await:
+
+To write a async javascript code we are using promises.
+But there is even more beter method to write the async code that is async/await which is introduced in the ES8.
+It writes async code but looks like synchronous code.
+make code easier to maintain, debug and write
+
+async:
+* The async keyword is used to return the async functions.
+* Unlike normal functions, async functions always return a promise.
+
+await:
+
+* await keyword should used only in the async function not in normal function.
+* await keeps the function to wait until the promises settles and returns the result.
+
+function fetchData() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('Data Fetched');
+    }, 2000);
+  });
+}
+
+async function getData() {
+  console.log('Fetching Data');
+  try {
+    const getData = await fetchData();
+    console.log(getData);
+  } catch (error) {
+    console.log('error', error);
+  } finally {
+    console.log('Done');
+  }
+}
+
+Event Loop:
+
+This should be need to understand every senior dev that how the javascript works in background.
+
+Javascript run time environment:
+
+Call Stack
+Web Api's 
+Callback Queue/Task Queue
+Event loop
+
+Sync code works:
+
+ex: console.log("one")
+console.log("two")
+console.log("three")
+
+Call stack, global() "one" will come and pop out and print it console like the same for two and three and finally global() things also pop out. 
+
+For sync code there is no need to work on other run time environment.
+
+Async timeout works:
+
+console.log("one");
+
+setTimeout(() => {
+  console.log("two")
+}, 0)
+
+console.log("three")
+
+call stack, will start with glbal() and push the "one" and pops out the one in the console. whereas the callback function will push into the web API's and move to callback queue/task queue in the meantime in three millseconds ("three") pushed into the callstack queue and pops out in the console. The event loop checks whether the callstack is empty or not. If it's empty and if there is any data in the callback queue/task queue it's push inside the call stack queue and display the output.
+
+As mentioned, callback delays are minimum delay not a guaranteed delay.
+
+This is how it's running in the js run time environment.
+
+Async Promise works:
+
+console.log("one");
+
+const promise = fetch("url")
+promise.then(value =>{
+  console.log("url", value)
+})
+
+console.log("three")
+
+To make the async promise work we need to introduce two more thing in the js run time enviornment. One is memeory heap and second is micro task queue.
+
+The memeory heap is used to keep the promises vaues, onFulfillment, onRejection, Whereas it will push the callback function into the Web API's and the webAPI's push it into the micro task queue and the value is passed to the memeory heap onFulfillment and onRejection. So once the call Stack is empty the event loop move the callback function from micro task queue to call stack queue and execute the function.
+
+Noteworthy points:
+If we have callback function in both task queue and micro task queue. Event loop first moves out the micro task queue to the call stack and execute first and then it will consider the task queue to push into the call stack to exectue.
+
+
+
+
+
+

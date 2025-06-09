@@ -1,0 +1,293 @@
+Javascript Strings:
+
+Strings are used to store the text.
+
+Strings are written with quotes.
+
+String can be either single or double quotes and there is no difference between these two.
+
+ex: let carName1 = "Volvo XC60";  // Double quotes
+let carName2 = 'Volvo XC60';  // Single quotes
+
+Template Strings: 
+Template strings are introduced in the ES6.
+This are enclosed in backticks.
+Templates allow the single and double quotes inside the string.
+ex:
+let text = `He's often called "Johnny"`;
+
+Escape characters:
+
+Because javascript will misunderstand those strings to resolve this we can use backslash as well.
+
+let text = "We are the so-called "Vikings" from the north.";
+
+in the above text the output will provided by js is We are so-called
+
+to handle this we can use the backslash.
+
+let text = "We are the so-called \"Vikings\" from the north.";
+output:
+We are the so-called "Vikings" from the north.
+
+String methods:
+
+Javascript strings are primitive and immutable. All string methods produce new string without affecting the original string.
+
+String Length:
+
+To find the length of the string, we can use the length property.
+
+ex: let text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+let length = text.length;
+
+Extracting String characters:
+
+We can extract the string character using 4 methods.
+
+* at(position)
+The at() method returns the character at a specified index (position) in a string:
+
+It do support the negative indexing and returns undefined when the value goes out of range.
+
+ex: let text = "HELLO WORLD";
+console.log(text.at(0)); // output is H
+console.log(text.at(-1)); // output is D
+console.log(text.at(11)); // undefined
+
+
+* charAt(position) 
+The charAt() method returns the character at a specified index (position) in a string:
+
+It doesn't support the negative indexing and returns empty when the value goes out of range.
+
+ex: let text = "HELLO WORLD";
+let char = text.charAt(0); // output is H
+console.log(text.chatAt(-1)); // output is ""
+console.log(text.charAt(11)); // ""
+
+For negative indexing use at() and for older browser support and no need for negative indexing we can use chartAt()
+
+* charCodeAt(position)
+The charCodeAt is used to return code of the character of the string in the specificed positions
+The method returns a UTF-16 code
+ex: const name = "W3Schools";
+let letter = name.charCodeAt(2);
+83 
+
+* Use property access [] like array
+
+Property access might be a little unpredictable:
+It makes strings look like arrays (but they are not)
+If no character is found, [ ] returns undefined, while charAt() returns an empty string.
+
+ex: let text = "HELLO WORLD";
+text[0] = "A";  // Gives no error, but does not work
+
+Extracting String Parts:
+
+There are 3 methods to extract the string parts.
+
+* slice(start, end)
+slice() extracts the part of the string and provide new string
+
+ex:
+let text = "Apple, Banana, Kiwi";
+let part = text.slice(7, 13);
+output is: Banana, start 7th position and end 13th position where end is not included.
+
+If you omit the second params it will extract the remaining part of string
+
+let text = "Apple, Banana, Kiwi";
+let part = text.slice(7);
+output is: Banana, Kiwi 
+
+If a parameter is negative, the position is counted from the end of the string:
+
+let text = "Apple, Banana, Kiwi";
+let part = text.slice(-12);
+output is: Banana, Kiwi 
+
+This example slices out a portion of a string from position -12 to position -6:
+
+let text = "Apple, Banana, Kiwi";
+let part = text.slice(-12, -6);
+output is: Banana
+
+* substring(start, end).
+substring extracts the  part of the string and provide a new string.
+This is similar to slice but the negative value is considered as 0 is substring()
+
+let str = "Apple, Banana, Kiwi";
+document.getElementById("demo").innerHTML = str.substring(-12,-6);
+""
+
+let str = "Apple, Banana, Kiwi";
+document.getElementById("demo").innerHTML = str.substring(-12);
+Output is Apple, Banana, Kiwi
+
+
+* substr(start, length)
+This is similar method of slice.
+
+But the end params is speicify the length of the extracted part.
+The substr() is deprecated in the latest javascript standard.
+If the first parameter is negative, the position counts from the end of the string.
+
+let str = "Apple, Banana, Kiwi";
+let part = str.substr(7, 6);
+output is: Banana
+
+let str = "Apple, Banana, Kiwi";
+let part = str.substr(-4);
+Kiwi
+
+Converting string to upper and lower case:
+
+A string is converting to upper case is called toUpperCase()
+
+ex: let text1 = "Hello World!";
+let text2 = text1.toUpperCase(); // HELLO WORLD!
+
+A string is converting into lower case is called toLowerCase()
+
+ex: let text1 = "Hello World!";
+let text2 = text1.toLowerCase(); // hello world!
+
+Concat:
+
+concat() joins two or more strings:
+
+let text1 = "Hello"
+let text2 = "World!"
+let text3= text1.concat(" ", text2);
+
+Instead of + operator we are using concat to join the strings.
+
+text = "Hello" + " " + "World!";
+text = "Hello".concat(" ", "World!"); These two examplese provide the same output.
+
+Trim:
+
+A trim method is used to remove the whitespace of the string. There are two other methods as well. trimStart and trimEnd
+which removes the start and end whitespace of string based on the function.
+
+padStart and padEnd():
+There are two string methods which is used to give padding at the beginning and ending of a string.
+
+The padStart() method provides a string from the start.
+
+let text = "5";
+let padded = text.padStart(4,"0");
+// 0005
+
+The padEnd() method provides a string from the end
+
+let text = "5";
+let padded = text.padStart(4,"0");
+// 5000
+
+Note: we need to convert the variable to string then only the padStart and padEnd will work.
+
+repeat():
+The repeat() method returns a string with a number of copies of a string.
+The repeat() method returns a new string and does not change the original string.
+
+ex : let text = "Hello world!";
+let result = text.repeat(4); // Hello world!Hello world!Hello world!Hello world!
+
+replace();
+
+The replace() method only replace the first string of the match.
+
+If we want to replace all the matches we need to set the /g to replace all the words.
+
+let text = "Please visit Microsoft and Microsoft!";
+let newText = text.replace(/Microsoft/g, "W3Schools");
+
+replaceAll():
+
+The replaceAll() method replace all the strings instead of global we can use the replaceAll method to replace it.
+
+text = text.replaceAll("Cats","Dogs");
+text = text.replaceAll("cats","dogs");
+
+Converting string to array:
+
+We can use split method to conver the string to array.
+
+String Search Methods:
+
+indexOf():
+The indexOf() method is used to search are return the index (position) of the first occurence of a string in a string. It returns -1 if the string is not found.
+
+let text = "Please locate where 'locate' occurs!";
+let index = text.indexOf("locate"); // 7
+
+lastIndexOf():
+The lastIndexOf() method is used to search are return the index (position) of the last occurence of a strings.
+
+let text = "Please locate where 'locate' occurs!";
+let index = text.lastIndexOf("locate"); // 21
+
+Both methods accepts the second parameter as the starting position for the search.
+
+indexOf(searchValue, startPosition) where the searchValue and startPosition will start from there and search for it.
+lastIndexOf(searchValue, endPosition) where the searchValue and startPosition starts from end to start and search for it.
+
+search():
+The search() method searches a string for a string and returns the position of the match.
+
+let text = "Please locate where 'locate' occurs!";
+text.search("locate"); 7
+
+Both search and indexOf() are looks similar but there might be difference.
+The search() method cannot take a second start position argument.
+The indexOf() method cannot take powerful search values.
+
+match():
+match method returns an array containing the result of matching string against a string.
+
+let text = "The rain in SPAIN stays mainly in the plain";
+text.match("ain");
+If there is no global match it will return the first value "ain"
+
+matchAll():
+matchAll will return an array containing a result of matching string against a string.
+
+let text = "I love cats. Cats are very easy to love. Cats are very popular."
+const iterator = text.matchAll("Cats"); Cats, Cats
+const iterator = text.matchAll(/Cats/gi); cats, Cats, Cats
+
+includes():
+includes() method returns true if a string contains a specified value. Otherwise it returns value.
+
+let text = "Hello world, welcome to the universe.";
+text.includes("world"); true
+
+let text = "Hello world, welcome to the universe.";
+text.includes("world", 12); //false
+
+let text = "Hello world, welcome to the universe.";
+text.includes("world", 6); // true
+
+string startsWith and endsWith:
+The startsWith() method returns true if a string begins with a specified value.
+
+let text = "Hello world, welcome to the universe.";
+text.startsWith("Hello"); true
+
+let text = "Hello world, welcome to the universe.";
+text.startsWith("world", 6): // true
+
+The endsWith() method returns true if a string ends with a specified value.
+
+Otherwise it returns false:
+
+let text = "John Doe";
+text.endsWith("Doe"); // true
+
+
+
+
+

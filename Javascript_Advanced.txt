@@ -1,0 +1,204 @@
+Scope:
+There are three level of scopes
+
+Block scope - variable declared inside the curly braces and cannot be accessed outside the block.
+
+Function scope - variable declared inside the function cannot be accessed from outside the function.
+
+Global scope - global scoped variables can be accessed inside a block or function.
+
+Nested Scope or Lexical scoping:
+
+Nested fucntions have access the permission to declare the own scope as well as outer scope.
+
+ex: let a = 10;
+      function outer() {
+        let b = 20;
+        function inner() {
+          let c = 30;
+          console.log(a, b, c);
+        }
+        inner();
+      }
+      outer();
+    // 10 20 30
+
+Closures():
+In javascript, when we return a function from another function, we are effectively returning a combination of the function definition along with the function scope.
+The combination of function and it's scope chain is what is called a closure in javascript.
+
+function outer() {
+  let count = 0;
+  function inner() {
+    count++;
+    console.log(count);
+  }
+  return inner;
+}
+const fn = outer();
+fn();
+fn(); // 1 2
+
+Currying():
+Currying is a process of functional programming in which we transform a function with multiple arguments into sequence of nesting function that takes one arguments at a time.
+
+ex: function(a, b, c) is transformed to a f(a)(b)(c);
+
+function sum(a, b, c) {
+  return a + b + c;
+}
+
+function curry(fn) {
+  return function (a) {
+    return function (b) {
+      return function (c) {
+        return fn(a, b, c);
+      };
+    };
+  };
+}
+const curriedSum = curry(sum);
+console.log(curriedSum(2)(3)(5));
+
+this keyword:
+The javascript this keyword which is used in a function, refers to object it's belongs to.
+It makes function resuable by letting you decide the object value.
+this value is determined entirely by how a function is called.
+
+How to determine this?
+Implict binding, explict binding, new binding, default binding
+
+Implict binding:
+When a function is invoked with . notation and the object to the left is what "this" keyword is referencing.
+
+ex: const person = {
+      name: 'Diwakar',
+      sayMyName: function () {
+        console.log(`My name is ${this.name}`);
+      },
+    };
+    person.sayMyName(); // My name is Diwakar
+
+Explict binding:
+We are expliciting calling the function from the person object and using call build in method we are calling the this keyword.
+
+  const person = {
+    name: 'Diwakar',
+    sayMyName: function () {
+      console.log(`My name is ${this.name}`);
+    },
+  };
+
+  person.sayMyname("Diwakar");
+
+  function sayMyName() {
+    console.log(`My name is ${this.name}`);
+  }
+
+  sayMyName.call(person);
+
+New binding:
+function Person(name) {
+  this.name = name;
+}
+
+const p1 = new Person('Diwakar'); which refers the new binding where every times this keyword has empty notation.
+const p2 = new Person('A');
+console.log(p1.name, p2.name); // Diwakar A
+
+Default binding:
+If all the three bindings is not stastified, default binding will takes time that means it will look for global scope whether name has been called in the global scope or not.
+
+Order of predence:
+new binding, explict binding, implict binding, default binding
+
+Prototype:
+In javascript, every function has property called prototype that points to an object. We can make use of prototype object to determine all the shareable object.
+Is used to share the properties and methods across instances.
+The other use is inheritance, which inhertiance is support to the concept of prototype.
+
+ function Persons(fname, lname) {
+    this.fname = fname;
+    this.lname = lname;
+  }
+
+  const person1 = new Persons('Diwakar', 'A');
+  const person2 = new Persons('Riya', 'Diwakar');
+
+  Persons.prototype.getFullName = function () {
+    return `${this.fname} ${this.lname}`;
+  };
+  console.log(person1.getFullName()); // Diwakar A
+  console.log(person2.getFullName()); // Riya Diwakar
+
+Class:
+classes are make simple syntax over the prototype inhertiance.
+
+superhero function inhertis from person.
+
+class ClassPerson {
+    constructor(fName, lName) {
+      this.fName = fName;
+      this.lName = lName;
+    }
+
+    sayMyName() {
+      return `${this.fName} ${this.lName}`;
+    }
+  }
+
+  const newP1 = new ClassPerson('Diwakar', 'A');
+  console.log(newP1.sayMyName());
+
+  class OurSelf extends ClassPerson {
+    constructor(fName, lName) {
+      super(fName, lName);
+      this.Ourself = true;
+    }
+  }
+  const together = new OurSelf('Diwakar', 'A');
+  console.log(together.sayMyName());
+
+extends and super are used for inherits from person
+
+Generators:
+Generators are special class of function that simplify the task of writing the iterators.
+Generators function is the function that can stop from midway and continue where it starts.
+It yields the value.
+Unlike normal function, generator will return only what is called in the generator object.
+
+function* generatorFunction() {
+  yield 'Riyaa Sai';
+  yield 'Is my girl';
+}
+
+const generatorObject = generatorFunction();
+for (const word of generatorObject) {
+  console.log(word);
+}
+
+
+
+
+
+# | Your Answer | ✅ Correct? | Notes
+1 | undefined | ✅ | Excellent explanation on hoisting inside function. var x is hoisted but not initialized.
+2 | 10, 5 | ✅ | Perfect — block scope of let.
+3 | undefined | ✅ | Correct — var is hoisted but not initialized.
+4 | Hello! | ✅ | Nice! Function declaration is hoisted.
+5 | 1, 2 | ✅ | Closure is correct — you're returning and preserving the lexical scope.
+6 | 3, 3, 3 | ✅ | You nailed it — var is function-scoped, not block-scoped.
+7 | "Success", "Next" | ✅ | Beautiful flow. You understood .then() chain perfectly.
+8 | Caught: Oops! | ✅ | Correct. catch() handles rejection.
+9 | ❌ | A, B, D, C → A prints, then B, then D (sync), then C (microtask after). | 
+10 | 42 | ✅ | Returned promise from async resolves to 42.
+11 | Start, End, Promise, Timeout | ✅ | Spot on — this is textbook event loop explanation.
+12 | Synchronous, Microtask | ✅ | Great. Microtasks come after sync.
+13 | [6, 8] | ✅ | > 2 gives 3, 4 → times 2.
+14 | [99, 2, 3] | ✅ | Correct. Both point to same array.
+15 | ✅ | You're right that it prints undefined, but here's why: greetFunc loses context of this. Calling user.greet() would fix it. | 
+16 | {a: 1, b: 2} | ✅ | Clear and correct!
+17 | Hi Bob | ✅ | Nailed call() usage.
+18 | 99 | ✅ | Perfect — bind() creates a bound copy, not executed yet.
+19 | true, false | ✅ | Coercion and strict comparison spot on.
+20 | "Fallback" | ✅ | Nice! ?? only triggers for null or undefined.

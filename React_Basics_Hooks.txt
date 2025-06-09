@@ -1,0 +1,338 @@
+1. React?
+Open source library for building user interfaces
+It's not a framework, it's library
+
+Why learn React?
+Created and maintained by facebook
+Huge community
+In demands skillset
+
+React is component based architecture. It's also used for reusable code.
+React is declarative - Tell React what you want and react will build the actual UI.
+DOM updates are handles gracefully in React.
+
+2. Hello world?
+Till react 18 we can use to create react app using
+
+npx create-react-app project folder name
+
+3. Components?
+Components represents the part of the user interface. One is for header, navbar, maincontent and footer.
+This will be called in the main component called app component.
+
+There are two types of components in react.
+
+Stateless Functional Component:
+function Welcome(props){
+  return <h1> Hello, {props.name} </h1>
+}
+
+Stateful Class component:
+
+4. functional components?
+
+ex: 
+import React from 'react';
+
+const Greet = () => <h1>Hello Diwakar</h1>;
+
+export default Greet;
+
+in app.js we need to import as "import Greet from './components/Greet';"
+
+We can use any name in the "import Greet from './components/Greet';" if it's default export
+
+if name is export we can use {"import {Greet} from './components/Greet';"}
+
+5. functional component vs class component:
+
+Advantage of using functional component:
+Simple functions, Absence of this keyword, Mainly responsible for UI, 2018 in react 16.7.0 they have introduced hook which we can use in the functional component without using class component for state update.
+
+6. JSX:
+
+JSX - stands for Javascript XML - extension of javascript language syntax.
+JSX tags have a tag name, attributes and children.
+Without using JSX we can render react. But JSX is very easy and understanadable to use.
+
+JSX differences
+
+onclick - onClick
+for - htmlFor
+class - className
+
+7.Props:
+
+props is an object that containss it's attributes and values which have been passed from the parent component.
+props are immutable and cannot change the value.
+
+8.State:
+
+Props vs State
+props gets passed between the component whereas state are used within the component.
+props are passed in the function paramters whereas state are declared in the function body.
+props are immutable we cannot change the props value in the child component whereas state can be changed within the component.
+props - functional components   useState - functional Components
+this.props - class components   this.state - class components 
+
+9.setState: 
+Always make use of setState and never modify it directly
+If we want to change the original state we want to change the prevState instead of  we need to pass arrow function as an arugument instead of objects.
+
+10. Why we need to use module css instead of other css methods in React?
+because module css only we can use in the local scope or in the respective component wheras external stylesheet will access in both parent and child component
+
+10.class based lifecycle components:
+Mounting - When an instance of component is being created and inserted into the DOM - componentDidMount 
+In mounting phase we have "constructor, static getDerivedStateFromProps, render and componentDidMount"
+Updating - When a component is being re-rendered as a result changes to either its props or state - componentDidUpdate
+In updating phase: "static getDerivedStateFromProps, shouldCompontUpdate, render, getSnapshotBeforeUpdate, componentDidUpdate"
+Unmounting - When componnent is being removed from the DOM. - componentWillUnMount
+Error Handling - When there is an error during rendering, in a lifecycle method, or in the constructor of any child component. - componentDidCatch
+In static getDerivedStateFromError and componentDidCatch
+
+11. React fragements:
+Fragrments basically let you group list of children elements without adding extra node in the DOM.
+We can use either <React.Fragement></React.Fragement> or <></> but this shorthand syntax we cannot pass the key attribute
+
+12. Pure components in class based:
+A purecomponent implements the shallowComponentUpdate lifecycle method by performing a shallow comparsion on the props and state of the component.
+If there is no difference, the component is not re-rendered - performance boost.
+
+13. Memo component is for functional component:
+React.memo is introduced in the 16.6
+This will avoid the unncessary re-renderes if the props or state is not changed in the component.
+
+14.Portals:
+One dom element in our react app and we are mounting our components.
+
+So if we want to mount our certain part of element to other dom element outside the root element.
+
+15 HOC and Render props:
+HOC and render props is used to share the common code between the components without repeating the same code.
+
+16. Context:
+Context provides a way to pass data through the component tree without having to pass props down manually at every level.
+
+three ways to create the context:
+1. create the context
+2. provide a context value
+3. Consume the context value
+syntax:
+const UserContext = React.createContext();
+
+const UserProvider = UserContext.Provider
+const UserConsumer = UserContext.Consumder
+
+export {UserProvider, UserConsumer}  
+
+17.Hooks:
+What are hooks?
+Hooks are addition feature in React 16.8 which allow you to use React features without having to write class based components.
+
+Why Hooks?
+Reason:
+In class based components, we need to understand how this keyword works in javascript.
+Remeber to bind event handlers in class components.
+There is no particular way to reuse stateful component logic.
+HOC and render props patterns do address this problem.
+Makes the code harder to follow.
+So hooks provide without changning the component hierarchy we can reuse the code.
+Related code is not organized in one place.
+Ex: Data fetching - We need to place in componentDidMount and componentDidUpdate
+    Event listeners - We need to place in componentDidMount and componentWillUnMount
+
+Rules of hooks:
+Only call hooks at the top level.
+Don't call hooks inside loops, conditions or nested functions.
+
+Only call hooks from react functions.
+Call them in react functional components and not in regular javascript function.
+
+18.useState
+
+useState hook is used to set the state and update the state of functional component.
+useState hook returns an array with 2 elements with array destructuring. The first element is the current value of the state, and the second element  is a state setter function.
+In case if the new State value is depends on the prev value. We can pass a function in the setter function to get the prev value.
+when dealing with array or object, we always make sure to use the spread your state variable and then call the setter function.
+ex:
+import React, { useState } from 'react';
+
+const HookCounter = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>Count {count}</button>
+    </div>
+  );
+};
+
+export default HookCounter;
+
+useState with prevState value:
+Everytime we will use prevState value we need to pass a function to get the prevState value and change the state for safer side.
+
+useState as Object:
+The setter function provided by useState hook doesn't automatically merge and update the objects. We have to manually merge it using spread operator to get the name value and then update it.
+
+const HookCounterTwo = () => {
+  const [name, setName] = useState({ firstName: '', lastName: '' });
+  return (
+    <div>
+      <input
+        type="text"
+        value={name.firstName}
+        onChange={(e) => setName({ ...name, firstName: e.target.value })}
+      />
+      <input
+        type="text"
+        value={name.lastName}
+        onChange={(e) => setName({ ...name, lastName: e.target.value })}
+      />
+      <h2>Your first name is - {name.firstName}</h2>
+      <h2>Your last name is - {name.lastName}</h2>
+    </div>
+  );
+};
+
+export default HookCounterTwo;
+
+19. useEffect:
+The Effect hook lets you perform the side effects in functional components. 
+
+It is a close replacement of componentDidMount, componentDidUpdate and componentWillUnMount.
+useEffect runs after every render.
+
+Conditionally run useEffect:
+Since we know useEffect will run after every render of the component. But we need to run the useEffect conditionally for certain scenario for that we need to add second parameter and pass the state or props to conditionally run the useEffect only at the time of props or state changed.
+
+ex: useEffect(() => {
+  document.title = `You clicked ${count} times`
+}, [count]) so this useEffect will only run whenever the count has been changed not for any other props or state change in the component.
+
+Run effect only once:
+In some cases we need to render the useEffect only once, if the state or props changes don't want to side effects but for certain scenario we can run the effect only once. By simply calling the second parameter and call that as [].
+
+useEffect(() => {
+  console.log("render only once")
+}, [])
+
+useEffect with cleanup:
+Sometimes we need to cleanup the timers, eventHandlers, subscription for that we need to add return function in the useEffect to unmount it.
+
+ex: useEffect(() => {
+  setInterval(console.log("ddddddd"), 1000)
+  return () => {
+    clearInterval()
+  }
+}, [])
+
+Mistakes we can do in useEffect:
+Sometimes we need to call function inside the useEffect for that we don't want to declare the function outside and call inside the useEffect. Instead we wrap the functin inside the useEffect so that we don't want to forget the props or state that need to pass in the dependency array.
+
+20. useContext:
+Context provides a way to pass data through the components tree without passing the props down manually at every level.
+
+useContext hook is useful in the consumeable place of the context value.
+
+three steps to create the context:
+1. Create the context
+ex: const UserContext = React.createContext()
+2. provide the context
+ex: <UserContext.Provider user={"Diwakar"}>
+      <Componment />
+    </UserContext.Provider>
+3. consume the context
+  import the {UserContext} from the parent file
+
+  const user = useContext(UserContext)
+
+21.useReducer
+
+useReducer is a hook that is used for state management.
+It's alternative for useState.
+useState has built using useReducer
+
+useReducer(reducer, initialState) accepts two values the reducer and initialState
+newState = reducer(currentState, action) reducer has two value which is currentState and action
+useReducer returns pair of value [newState, dispatch]
+
+const initialState = 0;
+const reducer = (state, action) => {
+  switch (action) {
+    case 'increment':
+      return state + 1;
+    case 'decrement':
+      return state - 1;
+    case 'reset':
+      return initialState;
+    default:
+      return state;
+  }
+};
+
+const HookCounter = () => {
+  const [count, dispatch] = useReducer(reducer, initialState);
+  return (
+    <div>
+      <div> Count = {count} </div>
+      <button onClick={() => dispatch('increment')}>Increment</button>
+      <button onClick={() => dispatch('decrement')}>Decrement</button>
+      <button onClick={() => dispatch('reset')}>Reset</button>
+    </div>
+  );
+};
+
+export default HookCounter;
+
+We can maintain both the state and action as objects. By using action as object we can able to pass additional data to reducer function, while using state as an object we can able to track on multiple state variables
+
+We can use multiple useReducers if we dealing with multiple variables which have the same state transition.
+
+useReducer with useContext
+
+Combining useReducer and useContext for global state management. Instead of sending the state one by one through props we can combine that using useReducer and useContext
+
+22. useState vs useReducer
+
+Type of state - Number, string, boolean use useState whereas object, array use useReducer
+Number of state transitions - One or two state variables useState is fine whereas more than 4-5 we can use useReducer
+Related State transitions? - If there is more than 2 we can use useReducer
+Local vs global - Local is useful for useState and global we can use for useReducer
+
+23. useCallback
+
+useCallback hook is used for performance optimization which is return a memoized version of the callback function that only changes if one of the dependencies has changed.
+
+24. useMemo
+
+This is used for performance optimization. useMemo is a hook that only recompute the cached value of the invoke function when one of the dependency has changed. 
+
+diff useCallback vs useMemo:
+
+useCallback caches the provider function instance itself whereas useMemo invokes the provider function and caches the result.
+
+so if you need cache the function useCallback, if you need the cache the result of invoke function useMemo.
+
+25. useRef
+This hook access the DOM nodes directly in functional components.
+It can also be store the mutable value. 
+
+Common interview react questions:
+Why react is popular or why React?
+React is an open-source JavaScript library by Meta, widely used for building fast and modular UIs. 
+It’s popular because of its component-based structure, virtual DOM for efficient rendering, and strong ecosystem support like Redux, Hooks, and React Router. 
+It’s backend-friendly and supports cross-platform development through React Native, making it flexible and scalable for both web and mobile apps.
+
+Virtual DOM?
+React keeps two virtual DOM in memory. One from before the update and one from after the update of state or props. It compares the two versions. So the real DOM is updated only where needed - this makes react fast.
+
+Virtual DOM vs Shallow DOM?
+So basically Shallow DOM is used for testing and only top level components is rendered without it's children to isolate unit testing and improve test performance.
+
+Controlled vs Uncontrolled components?
+Controlled components use React state to manage form inputs, giving full control of value, validation and behavior.
+Whereas uncontrolled components can be store in the DOM and can be access using ref.
+
+
+

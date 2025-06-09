@@ -1,0 +1,315 @@
+Javascript Objects:
+
+Objects are variables too. But object can contain many values
+
+const car = {type:"Fiat", model:"500", color:"white"};
+
+How to define javascript objects?
+
+Using object literal, new Keyword, Object Constructor.
+
+* Object Literal:
+
+Object literal is a list of name:value or key: value pair inside the {} curly braces.
+
+syntax: {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"}
+
+It is also called as object initializers.
+
+* Using new keyword:
+
+This example create a new JavaScript object using new Object(), and then adds 4 properties:
+
+// Create an Object
+const person = new Object();
+
+// Add Properties
+person.firstName = "John";
+person.lastName = "Doe";
+person.age = 50;
+person.eyeColor = "blue";
+
+But, there is no need to use new Object().
+
+For readability, simplicity and execution speed, use the object literal method.
+
+How to access the object:
+
+There is two method:
+* objectName.propertyName  // person.firstName;
+* objectName["propertyName"] // preson["firstName"];
+
+Javascript Object Methods:
+
+Method are actions that can be performed in the objects.
+
+Methods are function definitions stored as property values.
+
+const person = {
+  firstName: "John",
+  lastName : "Doe",
+  id       : 5566,
+  fullName : function() {
+    return this.firstName + " " + this.lastName;
+  }
+}; // Here this represents the person object.
+
+In Javascript, Objects are kings:
+
+If you understand objects, you understand javascript.
+
+Objects are containers for properties and methods.
+
+Properties are values.
+
+Methods are function stores as properties.
+
+Properies can be primitives values, function or even other objects.
+
+All Javascript values, except primitive, others are objects.
+// arrays, dates, function, objects, sets, maps, maths
+
+Javascript Primitive:
+
+A primitive value is a value that has no properties or methods.
+
+3.14 is a primitive value
+
+A primitive data type is data that has a primitive value.
+
+Primitive has 7 types of data type: string, number, boolean, bigint, null, undefined, Symbol
+
+Javascript Objects are mutable:
+
+Objects are mutable: they are addressed by reference not by value.
+
+ex: const x = person
+
+The object x is not a copy of person. The object x is person.
+
+The object x and the object person share the same memory address.
+
+Any changes in the x that also change in the object person.
+
+ex: // create an object
+const person = {
+  firstName: "Diwakar"
+  lastName: "Asok"
+  age:28
+  eyeColor: "Black"
+}
+
+const x = person
+
+x.lastName = "A"
+
+console.log(x.firstName, x.lastName)
+// Diwakar A
+
+Object Properties:
+
+Accessing object properties:
+
+Syntax: let age = person.age, person["age"], let age = person[x]
+
+Adding and Deleting Javascript properties:
+
+*Add:
+const person = {
+  firstName: "Diwakar"
+  lastName: "Asok"
+  age: "32"
+}
+
+person.nationality = "Indian"
+
+*delete:
+
+delete person.age;
+
+Nested Objects:
+
+Property values in an object can be other objects:
+
+myObj = {
+  name:"John",
+  age:30,
+  myCars: {
+    car1:"Ford",
+    car2:"BMW",
+    car3:"Fiat"
+  }
+}
+
+syntax of nested objects:
+myObj.myCars.car1 // myObj.myCars["cars1"] // myObj["myCars"]["car2"]
+
+Object methods:
+Methods are actions that are done in the objects.
+
+A method is a function definition stored as a property value.
+
+  const person = {
+    firstName: "John",
+    lastName: "Doe",
+    id: 5566,
+    fullName: function() {
+      return this.firstName + " " + this.lastName;
+    }
+  };
+
+How to access the object method:
+
+objectName.methodName()
+
+If you invoke the fullName property with(), it will execute as a function.
+name = person.fullName();
+John Doe
+If you access the fullName property without(), it will execute the function definition.
+name = person.fullName;
+function() { return this.firstName + " " + this.lastName; }
+
+Adding method in javascript object:
+
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  id: 5566,
+};
+
+person.name = function() {
+  return this.firstName + " " + this.lastName
+}
+
+Object Display:
+
+Displaying javascript objects will output [object Object].
+
+Some solution to display javascript object are:
+
+* Displaying the object values by name:
+// Create an Object
+const person = {
+  name: "John",
+  age: 30,
+  city: "New York"
+};
+
+// Display Properties
+document.getElementById("demo").innerHTML =
+person.name + "," + person.age + "," + person.city;
+// John, 30, New York
+
+* Displaying Properties in a Loop:
+const person = {
+  name: "John",
+  age: 30,
+  city: "New York"
+};
+
+let txt = ""
+for (let x in person) {
+  txt += person[x]. + " ";
+}
+
+// John 30 New York
+
+* Displaying the Object using Object.values():
+Object.values() creates an array from the property values:
+
+const person = {
+  name: "John",
+  age: 30,
+  city: "New York"
+};
+
+const myArray = Object.values(person);
+
+John,30,New York
+
+* Display using Object.entries():
+Object.entries() makes it simple to use objects in loops:
+
+const fruits = {Bananas:300, Oranges:200, Apples:500};
+
+let text = ""
+for (let [fruit, value] of Object.entries(fruits)) {
+  text += fruit + value
+}
+
+*using json stringify
+
+Javascript object can be converted into string using JSON method JSON.stringify():
+
+const person = {
+  name: "John",
+  age: 30,
+  city "New York"
+}
+
+console.log(JSON.stringify(person));
+{"name":"John","age":30,"city":"New York"}
+
+Object Constructors:
+Sometimes we need to create more object for the same type.
+
+To create an object type we use an object constructor function.
+
+object type person
+
+function Person(first, last, age, eye) {
+  this.firstName = first;
+  this.lastName = last;
+  this.age = age;
+  this.eye = eye;
+}
+
+// Here this represents the new object to be created.
+
+const myFather = new Person("Asok", "Kumar", "63", "black");
+const myMother = new Person("Jothi", "Asok", "59", "black");
+
+To add a new object in the constructor:
+
+We can't able to add new object in the constructor like this.
+
+Person.nationality = "English" // this will provide an undefined.
+
+We need to add prototype in the person constructor to add any new object
+
+Person.prototype.nationality = "English"
+
+Adding method to an function, Object and method to a constructor.
+
+Add method to function constructor
+function Person(first, last, age, eye) {
+  this.firstName = first;
+  this.lastName = last;
+  this.age = age;
+  this.eye = eye;
+  this.fullname= function() {
+    return `${this.firstName} ${this.lastName}`
+  }
+}
+
+// We can't add method like this.
+
+Person.changeName = function (name) {
+  this.lastName = name;
+}
+
+//Add method to object
+myMother.changeName = function (name) {
+  this.lastName = name;
+}
+
+myMother.changeName = "Asok"
+
+//Add prototype to change the name
+Person.prototype.changeName = function (name) {
+  this.lastName = name;
+}
+
+myMother.changeName("Doe");
+
+

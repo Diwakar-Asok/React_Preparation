@@ -1,0 +1,438 @@
+JavaScript Arrays
+
+An array is a special variable which is used to hold one or more values.
+
+ex:
+const cars = ["Tata", "Hyundai", "BMW"]
+
+Why use Array?
+If we need list a car or whatever we want we cannot add separate varaiable for all. For that, we can use array which is useful to hold more values in an variable.
+
+Creating an array:
+
+Using an array literal is the simplest way to create an array.
+
+Syntax:
+const array_name = [item1, item2, ...];      
+
+We can also use new Array() to create an array and also provide unexpected errors. But for readability, simplicity and execution speed we can use array literals.
+
+Converting array to string:
+The method toString() helps to convert array to string.
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits.toString();
+
+//output is "Banana", "Orange", "Apple", "Mango"
+
+Array are objects:
+Array are special type of objects. If we give typeof(array) we will get object for arrays.
+
+How to Recognize the array?
+solution 1:
+The problem is that the JavaScript operator typeof returns "object":
+
+const fruits = ["Banana", "Orange", "Apple"];
+let type = typeof fruits;
+
+The typeof operator returns object because a JavaScript array is an object.
+
+solution 2:
+Array.isArray() method defined whether the varaible is array or not.
+
+const fruits = ["Banana", "Orange", "Apple"];
+document.getElementById("demo").innerHTML = Array.isArray(fruits); // true means array
+
+solution 3:
+The instanceof operator returns true if an object is created by a given constructor:
+
+const fruits = ["Banana", "Orange", "Apple"];
+(fruits instanceof Array);
+
+Array Methods:
+
+* length:
+
+To find the size of the array using length.
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+let size = fruits.length; // 4
+
+* JavaScript Array toString():
+
+Convert array to string we can use toString() method.
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits.toString();
+output// Banana,Orange,Apple,Mango
+
+* JavaScript Array at():
+Introduced in the ES2022. The at() method returns the index element of the array which is same as [].
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+let fruit = fruits.at(2);
+let fruit = fruits[2]; // Apple
+
+* Javascript Array join()
+Array join method acts like toString() method but we can able to specify the operator in it.
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits.join(" * "); // Banana * Orange * Apple * Mango
+
+* Popping and pushing:
+To remove the items out from the array, or pushing items into the array popping and pushing will work.
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.pop(); Banana,Orange,Apple
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.push("Kiwi); Banana,Orange,Apple, Mango, Kiwi
+
+* Shift method:
+Shift method is used to remove the first element of the array which works opposite of pop method.
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.shift() // "Orange", "Apple", "Mango"
+
+* Unshift method
+Unshift method is to add the element in the beginging of the array. 
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.unshift("Lemon") // "Lemon", "Banana", "Orange", "Apple", "Mango"
+also change the length of the array
+
+* Concat method:
+The concat method is used to merge the two different array and doesn't affect the exisiting array and return new array.
+
+const arr1 = ["Cecilie", "Lone"];
+const arr2 = ["Emil", "Tobias", "Linus"];
+const arr3 = ["Robin", "Morgan"];
+const myChildren = arr1.concat(arr2, arr3); // Cecilie,Lone,Emil,Tobias,Linus,Robin,Morgan
+
+* copywithin method
+The copywithin method copies the array element to another position in the array.
+
+copywithin method overwrite the exisiting values
+It doesn't change the length of the array and does not add new items in an array.
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.copyWithin(2, 0); // Banana,Orange,Banana,Orange
+
+* flat method:
+The flat method creates a new array with sub array elements concatenated to a specified depth.
+
+const myArr = [[1,2],[3,4],[5,6]];
+const newArr = myArr.flat(); // [1,2,3,4,5,6]
+
+* splice method:
+
+The splice method is used to add new element into an array.
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.splice(2, 0, "Lemon", "Kiwi");
+
+The 2 parameter where to start the new element to get add
+The 0 parameter how many elements needs to remove from an array.
+The rest of the parameter needs to be added in the array.
+
+// "Banana", "Orange", "Lemon", "Kiwi", "Apple", "Mango"
+
+* toSpliced method:
+This is similar to splice method without altering the original array.
+
+const months = ["Jan", "Feb", "Mar", "Apr"];
+const spliced = months.toSpliced(0, 1); Feb, Mar, Apr
+
+* slice method:
+The slice method slices out a piece of array into an new array.
+
+This doesn't change the original array. Creates a new array from it.
+
+const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+const citrus = fruits.slice(3); // Apple, Mango 
+it starts from 3rd indexes and slice out the remaining part of the array.
+
+
+const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+const citrus = fruits.slice(2, 4); // Lemon, Apple
+
+If we have 2 parms, the first one where we need to start and remove the remaining part of the array excluding the last value. 
+
+Array Find and Search method:
+
+* indexOf()
+
+The indexOf() searches an array from an element and find it's position.
+const fruits = ["Apple", "Orange", "Apple", "Mango"];
+let position = fruits.indexOf("Apple") + 1; output is 1
+
+syntax: array.indexOf(item, start) // start is Optional
+
+* lastIndexOf()
+
+The lastIndexOf() searches an array from the last position of an element.
+
+const fruits = ["Apple", "Orange", "Apple", "Mango"];
+let position = fruits.indexOf("Apple") + 1; output is 3
+
+*includes
+
+The includes() method is used to search whether the element is present in the array or not. Either true or false
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+fruits.includes("Mango"); // is true
+
+* find()
+
+The find() method returns the value of the first array element that passes a test function.
+
+const numbers = [4, 9, 16, 25, 29];
+let first = numbers.find(myFunction);
+
+function myFunction(value, index, array) {
+  return value > 18;
+}
+// output is 25
+
+*findIndex()
+
+The findIndex() method returns the index of the first array element that passes the test function.
+
+const numbers = [4, 9, 16, 25, 36];
+let first = numbers.findIndex(x => x > 16);
+
+function myFunction(value, index, array){
+  return value > 18
+}
+
+The output is 3 which is index that statisfy the condition.
+
+*findLast()
+
+The findLast() methods returns the value of the last array element that passes the function.
+
+
+const temp = [27, 28, 30, 40, 42, 48, 30];
+let pos = temp.find(x => x > 40); // 48
+
+*findLastIndex()
+
+The findLastIndex() method returns the index of the last array elment that passes the condition.
+
+const temp = [27, 28, 30, 40, 42, 48, 50];
+let pos = temp.find(x => x > 40); // 6
+
+Array sort methods:
+
+* sort():
+
+The sort() method sorts an array alphabetically:
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.sort() // Apple,Banana,Mango,Orange
+
+* reverse():
+
+The reverse() methods reverses the element in an array.
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.reverse(); // Mango,Apple,Orange,Banana
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.sort();
+fruits.reverse();
+// Orange,Mango,Banana,Apple
+
+*toSorted():
+
+The toSorted() methods as a safe way to sort an array without altering the original array.
+
+const months = ["Jan", "Feb", "Mar", "Apr"];
+const sorted = months.toSorted(); // Apr, Feb, Jan, Mar
+
+*toReversed():
+
+The toReverse() methods as a safe way to reverse an array without altering the original array.
+
+const months = ["Jan", "Feb", "Mar", "Apr"];
+const sorted = months.toReverse(); // Apr, Mar, Feb, Jan
+
+* Numeric sort():
+By default, the sort() function values as strings.
+
+If numbers are sorted as strings, "25" is bigger than "100", because "2" is bigger than "1".
+
+so we need to different method sort will produce incorrect result.
+
+const points = [40, 100, 1, 5, 25, 10];
+points.sort(function(a, b){return a - b}); // 1,5,10,25,40,100
+
+descending order:
+const points = [40, 100, 1, 5, 25, 10];
+points.sort(function(a, b){return b - a}); 100,40,25,10,5,1
+
+Array Iteration:
+*forEach()
+The forEach() is used to iterate the values and doesn't modify the array by default, but it can modify if we explicity reassign values.
+
+This is mainly useful for loggin, api calls, and dom manipulation.
+
+ex: const fruits = ["Apple", "Banana", "Mango"];
+
+fruits.forEach((fruit, index) => {
+  console.log(`Fruit ${index + 1}: ${fruit}`);
+})
+
+// Output:
+// Fruit 1: Apple
+// Fruit 2: Banana
+// Fruit 3: Mango
+
+const users = ["Alice", "Bob", "Charlie"];
+
+users.forEach(user => {
+  fetch(`https://api.example.com/user/${user}`)
+        .then(response => response.json())
+        .then(data => console.log(data));
+})
+
+*map():
+
+The map() function is used to iterate the array and return a new array with the original array unchanged.
+
+const numbers = [1, 2, 3, 4]
+
+const double = numbers.map(num => num * 2)
+
+console.log(double) // 2, 4, 6, 8
+
+*flatMap():
+
+The flatMap() method first maps all elements of an array and then creates a new array by flattening it.
+
+const numbers = [1, 2, 3, 4]
+const flatNum = numbers.flatMap(num => [num, num * 2)]) // 1, 2, 2, 4, 3, 6, 4, 8
+
+*filter():
+
+The filter() method creates a new array with the array elements that statisfy the condition.
+
+const temp = [27, 28, 30, 40, 42, 35, 60];
+let high = temp.filter(x => x > 40); // [42, 60]
+
+*reduce():
+
+The reduce() method used to execute callback function to reduce it to single value.
+
+const numbers = [1, 2, 3, 4, 5];
+
+const sum = numbers.reduce((acc, num) => acc + num, 0);
+
+console.log(sum) // 15
+
+*reduceRight()
+
+The reduceRight() method used to execute callback function to reduce it from right to left.
+
+const words = ["Hello", "World", "JavaScript"];
+
+const result = words.reduceRight((acc, txt) => acc + txt);
+
+console.log(result) // Javascript, World, Hello
+
+*every()
+
+The every() method checks the array if all the values are passes the function to return true or false.
+
+const numbers = [12, 4, 9, 16, 11];
+let allOver18 = numbers.every(num => num < 18); // true
+
+*some()
+
+The some() method checks if some of the values are passes the function to return either true or false
+const numbers = [12, 4, 9, 20, 11];
+
+let output = numbers.some(num => num < 18) // true
+
+*entries()
+
+The entries() returns an array iterator object with key/value pairs.
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+const f = fruits.entries();
+
+for (let x of f) {
+  document.getElementById("demo").innerHTML += x;
+}
+
+//
+0,Banana
+1,Orange
+2,Apple
+3,Mango
+
+*with()
+
+The with() method as a safe way to update elements in an array without altering the original array.
+
+const months = ["Januar", "Februar", "Mar", "April"];
+const myMonths = months.with(2, "March"); ["Januar", "Februar", "March", "April"]
+
+...Spread operator:
+
+It's a copy of an array or shallow copy of an array.
+
+const original = [1, 2, 3];
+const copy = [...original];
+
+console.log(copy);  
+// Output: [1, 2, 3]
+
+It will merge two arrays and removes the concat() method
+
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+
+const merged = [...arr1, ...arr2];
+
+console.log(merged);  
+// Output: [1, 2, 3, 4, 5, 6]
+
+Convert string to array
+
+const str = "Hello";
+const charArray = [...str];
+
+console.log(charArray);  
+// Output: ['H', 'e', 'l', 'l', 'o']
+
+Add elements in between 
+
+const arr1 = [1, 2, 3];
+const arr2 = [7, 8, 9];
+
+const newArr = [...arr1, 4, 5, 6, ...arr2];
+
+console.log(newArr);  
+// Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+const numbers = [1, 2, 3, 1, 2, 4, 5];
+
+const uniqueNumbers = [...new Set(numbers)];
+
+console.log(uniqueNumbers);  
+// Output: [1, 2, 3, 4, 5]
+
+remove duplicate from an array using Set method
+
+const numbers = [4, 7, 2, 8];
+
+console.log(Math.max(...numbers));  
+// Output: 8
+
+pass elements as function arugments
+
+
+
+

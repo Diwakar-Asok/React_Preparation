@@ -1,0 +1,438 @@
+1. What is Javascript?
+Javascript is programming language of the web and it's world most popular programming lanugage and it's easy to learn.
+
+2. Why javascript?
+Javascript changes the behavior of the web pages and web developers should learn the javascript along with css and HTML for doing action such as button click, onblur, etc.
+
+3. Where to use javascript?
+Javascript can in the html pages in head and body section using <script> tags. Mostly we will prefer using the head sections and also external javascript call will make the code readable and maintainable. Where we can separate the HTML and JS code.
+
+4. How to display javascript data's?
+
+Javascript can "display" data in different ways.
+
+* Writing into an HTML element, innerHTML or innerText.
+* Writing into the HTML output using "document.write()".
+* Writing into the alert box, window.alert() or alert().
+* Writing into the browser console, console.log().
+
+innerHTML:
+To change the content in the HTML element we can use the innerHTML
+ex: h1>My First Web Page</h1>
+<p>My First Paragraph</p>
+
+<p id="demo"></p>
+
+<script>
+document.getElementById("demo").innerHTML = "<h2>Hello World</h2>";
+</script>
+
+innerText:
+To change the plain text in the HTML element.
+ex: h1>My First Web Page</h1>
+
+
+<p id="demo"></p>
+
+<script>
+document.getElementById("demo").innerTEXT = "Hello World"
+</script>
+
+document.write:
+The document.write() method should only be used for testing.
+
+ex:
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Web Page</h1>
+<p>My first paragraph.</p>
+
+<button type="button" onclick="document.write(5 + 6)">Try it</button>
+
+</body>
+</html>
+
+window.alert() or alert():
+You can use alert box to display data.
+
+ex:
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Web Page</h1>
+<p>My first paragraph.</p>
+
+<script>
+window.alert(5 + 6);
+</script>
+
+</body>
+</html>
+
+console.log():
+For debugging purposes, you can call the console.log() method in the browser to display data.
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<script>
+console.log(5 + 6);
+</script>
+
+</body>
+</html>
+
+5.JS comments
+
+Javascript comment for single line is //
+
+where as multiple line comment is /* */
+
+6.JS variables.
+
+Variables are containers for storing data in 4 ways.
+
+Automatically, var, let and const 
+
+var // we can declare anywhere in our application. If the application is old and support only to old browsers we need to declar var variables. Because let and const introduced in ES6. We can also access the var outside the block.
+
+let // If the value of the variables has to change we need to use let key and it can be accessible inside the block element.
+
+const // If the value of the variables is not changed and the types of array, object is not changed then const can be used as a variables.
+
+let keyword:
+let was introduced in ES6 2015. 
+Variable declared with let have block scope.
+Variable declared with let must be declared before use.
+Variable declared with let cannot be redeclared in the same scope.
+
+const keyword:
+const was introduced in ES6 2015.
+Varaible declared with const have block scope.
+Variable declared with const cannot be redeclared and reassigned of value, array and object.
+
+But we can change the element of const array and the properties of object.
+
+ex: // You can create a constant array:
+const cars = ["Saab", "Volvo", "BMW"];
+
+// You can change an element:
+cars[0] = "Toyota";
+
+// You can add an element:
+cars.push("Audi");
+
+// You can create a const object:
+const car = {type:"Fiat", model:"500", color:"white"};
+
+// You can change a property:
+car.color = "red";
+
+// You can add a property:
+car.owner = "Johnson";
+
+7. JS Datatypes:
+
+JS has 8 datatypes:
+String
+Number
+Bigint
+Boolean
+Undefined
+Null
+Symbol
+Object // The Object data type has both build-in objects and user defined objects.
+
+Build in objects are:
+arrays, objects, dates, maps, sets and more.
+
+String:
+Strings are written with quotes. We can use single or double quotes.
+
+// Single quote inside double quotes:
+let answer1 = "It's alright";
+
+// Single quotes inside double quotes:
+let answer2 = "He is called 'Johnny'";
+
+// Double quotes inside single quotes:
+let answer3 = 'He is called "Johnny"';
+
+Number:
+All javascript numbers can be written with or without decimal points.
+
+// With decimals:
+let x1 = 34.00;
+
+// Without decimals:
+let x2 = 34;
+
+Extra large or extra small numbers can be written with specific notation:
+
+let y = 123e5;    // 12300000
+let z = 123e-5;   // 0.00123
+
+Bigint:
+All javascript numbers are stored in the 64 bit floating-point format.
+
+So bigint is new datatype that can be used to store the integer values that are too big to be represent by javascript number data type.
+
+We cannot perform the operations for normal number datatype and bigint.
+
+ex : let x = BigInt("123456789012345678901234567890");
+
+Boolean:
+Booleans can only have two values: true or false.
+
+let x = 5;
+let y = 5;
+let z = 6;
+(x == y)       // Returns true
+(x == z)       // Returns false
+
+Arrays:
+So arrays are bascially written within square brackets.
+Array items are sepearated by commas.
+
+const cars = ["Saab", "Volvo", "BMW"];
+
+Array of index always starts at 0 . cars[0] is Saab
+
+Objects:
+Objects are written in the curly braces.
+
+Objects are have key-value pair and separted by commas.
+
+const person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
+
+Undefined:
+In JS, variable without value, has the value of undefined. The type is also the undefined.
+
+ex: let x, here x value is undefined.
+
+8. Javascript Operators:
+Javascript operators are used to perform the mathematical and logical operations.
+
+Types of javascript operators:
+Arithmetic operators
+Assignment operators
+Comparsion operators
+Logical operators
+Bitwise operators
+Ternary operators
+Type operators
+
+Arithmetic operator:
+Bascially it will provide the arithmetic to the numbers.
+ex: let a = 3;
+let x = (100 + 50) * a;
+It's types: addition, subtraction, multiple, division, exponential, increment, decrement, modular
+
+Assignments operators:
+To assign the value to the variables.
+
+types: =, +=, -=, *=, /=, %=, **=, <<=, >>=, >>>=, &=, |=, 
+1. &=  → Bitwise AND: 1 & 1 = 1, others = 0
+2. |=  → Bitwise OR: 0 | 0 = 0, others = 1
+3. ^=  → Bitwise XOR: Same bits = 0, Different = 1
+4. &&= → Logical AND: If x is truthy, assign y to x
+5. ||= → Logical OR: If x is falsy, assign y to x
+6. ??= → Nullish Assignment: If x is null or undefined, assign y to x
+
+Comparsion Operator:
+Which is used to compare the operands which results either true or false.
+comparing different data types.
+While comparing strings and number javascript converts that or break into one by one.
+==, ===, !==, !=, <, >, <=, >=
+
+Logical Operator:
+It used to determine the logic between variables or values.
+
+&&- both the condition should be true
+||- either one condition should be true
+!- If the result is true it's changes to false and vice versa
+
+Conditional Ternary Operator:
+
+let age = (age < 18) ? "Too Young" : "Too old"
+
+The Nullish operator:
+
+The ?? operator returns the first argument if it is not nullish (null or undefined).
+
+Otherwise it returns the second argument.
+
+let name = null;
+let text = "missing";
+let result = name ?? text;
+
+The Optional Chaining Operator (?.)
+
+The ?. operator returns undefined if an object is undefined or null (instead of throwing an error).
+
+// Create an object:
+const car = {type:"Fiat", model:"500", color:"white"};
+// Ask for car name:
+document.getElementById("demo").innerHTML = car?.name;
+
+9. Conditional Statements:
+
+We need to write or produce output for different action based on different scenarios.
+
+For that we need to use conditional statements.
+
+Use if to specifiy a block of code to be executed, if the statement is true.
+Use else to specify a block of code to be executed, if the statement is false.
+Use else if to specify a new condition to test, if the first condition is false.
+Use switch to specify many alternative blocks of code to be executed.
+
+ex: const hour = new Date().getHours();
+let grettings;
+
+if(hour < 10) {
+  greetings = "good morning";
+}
+else if(hour < 20){
+  greetings = "good day";
+}
+else {
+  greetings = "good evening";
+}
+
+The switch statement is used to perform different actions based on different conditions.
+
+switch (new Date().getDay()){
+  case 6:
+  text = "Today is saturday";
+  break;
+  case 0:
+  text = "Today is sunday";
+  break;
+  default:
+  text = "Looking forward to weekend"
+}
+
+the break statement is neccessary to break the condition if it's statisfy there or it will execute all other block condition as well.
+
+switch case uses strict comparsion (===) where the data type and value should be same.
+
+10. Loop (for, while, do-while, for..in, for..of)
+Loops can be execute a block of code a number of lines.
+
+for:  loops through a block of code a number of times
+
+syntax: for (let i=0, i < 5, i++) {
+  text += "The number is " + i + "<br>";
+}
+for..in: loops through the properties in object and array.
+
+ex: const person = {fname:"John", lname:"Doe", age:25};
+
+let text = "";
+for (let x in person) {
+  text += person[x];
+}
+
+for..of: loops through the values of an iterable object.
+
+const cars = ["BMW", "Volvo", "Mini"];
+
+let text = "";
+for (let x of cars) {
+  text += x;
+}
+
+while loop:
+
+The while loop loops through a block of code as long as a specified condition is true.
+
+while (condition) {
+  // code block to be executed
+}
+
+let text = "";
+let i = 0;
+while (i < 10) {
+  text += "<br>The number is " + i;
+  i++;
+}
+document.getElementById("demo").innerHTML = text;
+
+do-while loop:
+
+
+Loop Type	          Best Use Case	                            Iterates Over
+for	                Known number of iterations	              Index/Counter-based
+while	              Unknown iterations; condition-based       Condition                           
+do...while	        Run first, check condition later          Condition                           	
+for...in	          Looping object keys                       Object properties
+for...of	          Looping array or iterable values         Iterable elements                            
+
+11. regular function vs arrow function:
+Arrow function were introduced in the ES6.
+
+arrow function: let myFunction = (a,b) => a*b;
+
+regular function: function myFunction(a, b){
+  return a*b;
+}
+
+If the function has only one statement and one value to pass, we can remove the return and parathensis
+
+ex: hello = val => "Hello World".
+
+12. Javascript scope(var, let, const):
+Javascript variables has three types of scope.
+
+global,
+function,
+block
+
+Block scope:
+Was introduced in the ES6. where let and const variables has been introduced to access the variables inside the block scope.
+
+i.e variables declared { } cannot access from outside the block.
+
+ex : {
+  let x = 2;
+}
+// x can NOT be used here
+
+Variables declared with the var keyword can NOT have block scope.
+
+Varaibles declared { } inside the block can be accessed from outside the block.
+
+{
+  var x = 2;
+}
+// x CAN be used here
+
+Local or Function Scope:
+
+Variables declared within a javascript function are local to the function.
+
+// code here can NOT use carName
+
+function myFunction() {
+  let carName = "Volvo";
+  const carModel = "Hyundai"
+  var carPrice = "10000000"
+  // code here CAN use carName
+}
+
+// code here can NOT use carName
+Local variables have function scope.
+They can be accessed only within the function.
+
+Global scope:
+A variable declared outside the function are called global scope.
+
+A global variable are called global scope.
+
+It can be accessed any where in the scrips and functions of web page.
+
+In javascript, function and objects are also variables.

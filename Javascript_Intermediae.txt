@@ -1,0 +1,237 @@
+Javascript Destructuring:
+
+Destructuring Assignment Syntax
+
+object properties syntax:
+
+let {firstName, lastName} = person;
+
+array:
+let [firstName, lastName] = person;
+
+Object Destructuring:
+
+ const person = {
+  firstName: 'John',
+  lastName: 'Doe',
+  age: 50,
+};
+
+let { firstName, lastName } = person;
+console.log(firstName, lastName); // John Doe
+
+let { lastName: name } = person;
+console.log(name); //Doe
+
+let { firstName, lastName, country = 'US' } = person;
+console.log(firstName, lastName, country); // John Doe US
+
+Array Destructuring:
+
+// Create an Array
+  const fruits = ['Bananas', 'Oranges', 'Apples', 'Mangos'];
+
+  // Destructuring
+  let [fruit1, fruit2] = fruits;
+  console.log(fruit1, fruit2) // Bananas, Oranges
+
+   // Destructuring by skipping value
+  let [fruit1,,,fruit2] = fruits;
+  console.log(fruit1, fruit2) // Banans, Mangos
+
+  //Destructing by adding index.
+  let { [0]: fruit1, [2]: fruit2 } = fruits;
+  console.log(fruit1, fruit2); // Bananas, Apples
+
+The Rest property:
+// Create an Array
+const numbers = [10, 20, 30, 40, 50, 60, 70];
+
+// Destructuring
+const [a,b, ...rest] = numbers 
+console.log(...rest)// 30, 40, 50, 60, 70
+
+Spread & Rest Operators:
+
+Both operators starts with ... three dots but both has different ways to implement.
+
+Spread Operator:
+
+The spread operator is used to expand an array, objects, or iterable into individual elements.
+
+Expanding arrays
+ex: const numbers = [1, 2, 3]
+const newNumbers = [...numbers, 4, 5, 6]
+
+console.log(newNumbers) // [1, 2, 3, 4, 5, 6]
+
+merging arrays
+const arr1 = [1, 2, 3]
+const arr2 = [4, 5, 6]
+
+const totalArray = [...arr1, arr2]
+
+console.log(totalArray) // [1, 2, 3, 4, 5, 6]
+
+spreading in Function arugments:
+
+const arr = [1, 2, 3]
+
+const sum = (a, b, c) => {
+  return a + b + c;
+}
+
+console.log(sum(...arr)) // 6
+
+copying and merging objects:
+
+const person = {name: "Diwakar", Age: "32"}
+
+const city = {...person, city: "Dubai/Abu Dhabi"}
+
+console.log(city) // {name: "Diwakar", Age: "32", city: "Dubai/Abu Dhabi"}
+
+Rest Operator:
+It's used to collect multiple elements into single variable. It's mostly used in the function parameter and destructring.
+
+function parameter example
+  const number = (...num) => {
+    return Math.max(...num);
+  };
+
+  console.log(number(10, 30, 22, 44, 55));
+  // array rest operator
+
+  const fruits = ['Apple', 'Mango', 'Pineapple', 'Grapes'];
+
+  const [first, second, ...restFruits] = fruits;
+
+  console.log(first);
+  console.log(second);
+  console.log(restFruits);
+
+  // object rest operator
+  const personRest = {
+    name: 'Diwakar',
+    age: '32',
+    address: 'Dubai/Abu Dhabi',
+  };
+  const { name, age, ...address } = personRest;
+
+  console.log(name);
+  console.log(age);
+  console.log(address);
+
+Function Definition:
+
+Javascript funciton defined with the function keyword.
+
+Earlier in this tutorial we have studied that function has following syntax:
+
+* function declaration:
+function functionname(paramter){
+  //code written
+}
+
+Declared function are not called immediately until it's used to call.
+
+* function expression:
+
+Javascript function can also be defined using expression.
+
+That expression can be stored as variable
+
+ex: const x = function (a, b) {return a * b}
+
+console.log(x(4, 5))
+
+// function expression
+
+  const x = function (a, b) {
+    return a * b;
+  };
+  console.log(x(4, 5));
+
+  // the above function are anonymous function without proper function name.
+
+  // function hositing
+
+  function myFunction(y) {
+    return y * y;
+  }
+
+  console.log(myFunction(5));
+
+  // function declared above are not hoisted as variable hosited. We need to call after the function declaration.
+
+  // arrow function:
+  // Arrow function allows to write the short hand of the function expression. If the parameter having single value we can remove the return and curly braces.
+
+  const var1 = (a) => a;
+  console.log(var1(5));
+  const var2 = (a, b) => a * b;
+  console.log(var2(5, 5));
+
+/ Function paramters
+// Javascript function doesn't perform any checking on paramter values(arguments)
+
+function parameter(x, y) {
+  if (y === undefined) {
+    y = 2;
+  }
+  return x * y;
+}
+
+console.log(parameter(4));
+
+// We can pass the rest operator in the function paramter
+
+const numberMax = (...num) => {
+  return Math.max(...num);
+};
+
+console.log(numberMax(10, 30, 22, 44, 55));
+
+// Call Method
+With the call() method, we can write a method that can be used on different objects.
+
+The call() method in javascript which is used to invoke a function with a specified this value and pass arguments one by one.
+
+ex:    const person = {
+        fullName: function (city, country) {
+          return `${this.firstName} ${this.lastName} from ${city} ${country}`;
+        },
+      };
+
+      const person1 = {
+        firstName: 'Diwakar',
+        lastName: 'A',
+      };
+
+      console.log(person.fullName.call(person1, "Dubai/Abu Dhabi", "UAE"));
+
+// apply method
+The apply() method in javascript which is used to invoke a function with a specified this value and pass arguments as an array.
+
+const number = [100, 200, 300]
+
+const finMax = Math.max.apply(null, number) // here we are passing argument as an array
+
+output is 300
+
+//bind method
+The bind() method in javascript is used to create a new function with a specified this value and preset aruguments, but it does not execute the function immediately.
+
+const car = {
+  brand: "BMW",
+  model: "R series",
+  showDetails: function () {
+    return `${this.brand} ${this.model}`
+  }
+}
+
+const bike = { brand: "Honda", model: "Unicorn 160"}
+
+const showBikeDetails = car.showDetails.bind(bike);
+console.log(showBikeDetails())
+

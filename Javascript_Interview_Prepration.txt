@@ -1,0 +1,393 @@
+1. what is execution context and scope?
+
+Execution context:
+
+Think of it as environment in which javascript code runs.
+
+There are three type of execution context:
+* Gloabal Execution Context(GEC)
+Created when the JS file starts running.
+Anything declared outside a function lives here(eg gloabl variables, functions)
+
+* Function Execution Context(FEC)
+Created whenever function is invoked
+Has it own variables and parameters
+
+*Eval Execution Context(rarely used)
+Comes from the eval() function (not recommend to use)
+
+Everytime a function is called a new execution context is pushed into the call stack
+
+Scope:
+Scope determines where we can access the variables.
+
+Three types of scopes:
+* Global scope.
+Global scoped variables can be accessed inside a block or function.
+
+ex: let x = 10
+
+function global(){
+  console.log(x) // can access x here
+}
+
+global();
+
+* local/function scope
+Variable declared inside the function cannot be accessed from outside the function.
+
+ex: function local() {
+  let x = 10
+  console.log(x) // we can accessible it here
+}
+console.log(x) // here we can't access the scope
+local();
+
+*block scope:
+Variable declared inside the curly braces and cannot be access outside the block.
+
+ex: {
+  let x = 10
+  console.log(x) // can be accessible here
+}
+
+console.log(x) //but not here
+
+Lexical scoping:
+
+Inner function can access variables from outer functions - this is called lexical scoping.
+
+ex: function outer(){
+    let x = 10
+    function inner(){
+      let y = 20
+      console.log(x, y) // lexical scoping
+    }
+    inner()
+}
+outer()
+
+What is variable shadowing?
+When local variable in a function has the same name as one in the outer scope.
+ex:
+let value = 30;
+function demo() {
+  let value = 5;
+  console.log(value); //output is 5
+}
+demo();
+console.log(value); // output is 30
+
+2. Hoisting:
+Hoisting in javascript moves declarations to the top of the current scope before executing the code.
+
+ex: var hositing:
+
+console.log(x); // Undefined
+var x = 20;  // x is hoisted but the value is not defined for x so it's undefined.
+
+ex : let/const hoisting:
+
+console.log(y);reference error
+let y = 20; // y is hoisted but it's in Temporal Dead Zone(TDZ). So accessing y before declaration throws an error
+
+ex: function declaration hositing
+
+ greet(); // function declaration is fully hoisted - both name and defintion
+function greet() {
+  console.log('Hello');
+}
+
+ex: Function expression with var(not hoisted like declaration):
+
+sayHi(); // Typeerror: sayHi is not a function
+var sayHi = function hi() {
+  console.log('hello');
+};
+
+3. Closures();
+In javascript, when we return a function from another function, we are effectively returning a combination of the function defintion along with the funcion scope.
+
+Closures and Loops + var can lead to weird bugs unless you understand how scopes are preserved.
+
+4, 5 Async Concept:(This I can refer the asynchronus text)
+
+6. Array concept: (This I can refer the array txt file)
+
+7. Object: (This I can refer the object txt file)
+
+8. this keyword:
+
+this keyword in object
+
+const personss = {
+  name: 'Diwakar',
+  greet() {
+    console.log(`Hello, ${this.name}`);
+  },
+};
+
+personss.greet();
+
+this keyword in regular function:
+
+function show() {
+  console.log(this);
+}
+
+show(); In browser it will show as Window but in strict mode it will undefined.
+
+this keyword in arrow function:
+
+const personss = {
+name: 'Diwakar',
+greet: () => {
+  console.log(`Hello, ${this.name}`);
+},
+};
+
+personss.greet(); // Hello undefined
+
+this in constructors
+
+function Car(brand ){
+  this.brand = brand;
+}
+
+const myCar = new Car("TATA");
+console.log(myCar.brand) // TATA
+
+call, apply, bind method to use this keyword
+
+call() // call method in javascript which is used to invoke a function with specified this value and pass argument one by one.
+
+const user = {
+  name: "Diwakar"
+}
+
+function sayHello(age, role) {
+  console.log(`Hi this is ${this.name}` and my age is {age} and my role is {role})
+}
+
+sayHello.call(user, "32", "Senior Frontend Developer/TL")
+
+apply() // apply method in javascript which is used to invoke a function with specified this value and pass arugment as an array.
+
+const arrayValue = [100, 200, 300]
+
+console.log(Math.min.apply(this, arrayValue)) // 100
+
+bind() // bind method in javascript which is used to execute a new function with specified this value, bind does not execute the function immediately.
+
+
+function sayHello(age, role) {
+  console.log(
+    `Hi this is ${this.name} and my age is ${age} and my role is ${role}`
+  );
+}
+
+const bindUser = sayHello.bind(
+  bindding,
+  '32',
+  'TL/Senior frontend developer'
+);
+
+9. Functions (I have gone through the topics of function declaration, function expression, arrow function and IIFE in chaGPT and I was clear on those topics)
+
+10. Prototype and Inheritance:
+what is prototype?
+Every object in javascript has hidden property called [prototype]. 
+
+syntax: __proto__ or Object.getPrototypeOf(obj)
+
+This means, this is reference to another object from which it can inherit their properties and methods.
+
+const person = {
+  greet() {
+    return "Hello!"
+  }
+}
+
+const user = Object.create(person); // this is way for prototype
+
+console.log(user.greet()) // Inherit from person object
+
+* Prototype chain:
+In javascript, the property is not find in object, it looks up the prototype chain until its find out (or reaches null)
+
+* Function prototype
+When we use to create an object using new keyword, then the function has prototype property.
+
+function Animal(name) {
+  this.name = name;
+}
+
+Animal.prototype.sayHello = function () {
+  return `Hi, I am ${this.name}`;
+};
+
+const dog = new Animal('Hutch');
+console.log(dog.sayHello());
+
+* Inheritance:
+Inheritance is one of the core concept of OOP, where one object can access the property and methods of other objects. Means it can add new ones or override them.
+
+Ex:
+
+class Animals {
+  constructor(name) {
+    this.name = name;
+  }
+
+  speak() {
+    console.log(`${this.name} makes a noise`);
+  }
+}
+
+class Dog extends Animals {
+  constructor(name, breed) {
+    super(name); // Inherit from parent class
+    this.breed = breed;
+  }
+
+  speak() {
+    console.log(`${this.name} barks `);
+  }
+
+  getBreed() {
+    console.log(`${this.name} is a ${this.breed}`);
+  }
+}
+
+const myDog = new Dog('Buddy', 'Labrador');
+myDog.speak();
+myDog.getBreed();
+
+Bonus topics:
+Type coercion:
+==  // checks for value equality after type coercion
+=== // checks for value and type equality (strict comparsion)
+
+ex: console.log(5 == "5") // true
+console.log(5 === "5") // false
+
+Truthy/Falsy values:
+falsy values are false, 0, undefined, null, "", NaN
+All other values are truthy
+
+ex : let value = undefined;
+
+if (value) {
+  console.log(true);
+} else {
+  console.log('ssss', false);
+}
+
+Debounce and Throttle:
+Debounce: Delays function execution until after a pause.
+Throttle: Limit function execution to once in a interval time.
+
+Curring:
+Currying is the process of functional programming in which we transform a function with multiple arguments into sequence of nesting function that take one argument at a time.
+
+function sum(a, b, c) {
+  return a + b + c;
+}
+
+function curry(fn) {
+  return function (a) {
+    return function (b) {
+      return function (c) {
+        return fn(a, b, c);
+      };
+    };
+  };
+}
+const curriedSum = curry(sum);
+console.log(curriedSum(2)(3)(5));
+
+Module(import/export):
+Used to modularize code across file.
+
+// utils.js
+export const add = (a, b) => a + b;
+
+// main.js
+import { add } from "./utils.js"
+console.log(add(2, 3));
+
+JSON methods:
+JSON.stringify() -> converts JS object to JSON string
+JSON.parse() - converts JSON string to object.
+
+const json = { name: 'Diwakar', age: '30' };
+const str = JSON.stringify(json);
+console.log(str);
+
+const parse = JSON.parse(str);
+console.log(parse.name);
+
+LocalStorage & sessionStorage:
+. Store data in the browser
+. localStorage presists across session 
+. sessionStorage lasts only until the lab is closed
+
+locationStorage.setItem("user", "Diwakar");
+console.log(localStorage.getItem("user")) // Diwakar
+
+sessionStorage.setItem("token", "123456")
+
+Here's my clear advice from an interview perspective:
+
+📝 Recommended Approach:
+Since your primary goal is to secure a strong frontend role (React-focused) in Dubai/Abu Dhabi, here's a strategic and efficient approach to keep your knowledge sharp:
+
+First (3 Days):
+✅ Brush up HTML/CSS, Flexbox, Grid (3 days)
+
+This will help you:
+
+Refresh core fundamentals (selectors, semantics, responsive design, accessibility).
+
+Revise layout essentials (Flex & Grid), often tested heavily in frontend interviews.
+
+Gain confidence for HTML/CSS-related questions in React-based interviews.
+
+Next (From Day 4 onwards):
+✅ Dive Deep into React Preparation (10–20 days)
+
+You should aim to:
+
+Master basics first (components, props, state, lifecycle methods/hooks).
+
+Understand React router, context, Redux/Zustand.
+
+Build a couple of mini-projects or replicate common interview scenarios.
+
+Finally (Closer to Interviews):
+✅ Quick Revision of JavaScript + HTML/CSS weekly (2–3 hours)
+
+Continuously revisit JS & HTML/CSS concepts through quizzes or mini-exercises to ensure readiness at all times.
+
+📅 Suggested Timeline (Interview Prep Roadmap):
+
+Days	Topics	Purpose
+Next 3 days	HTML/CSS, Flex, Grid revision	Confidence in core fundamentals
+Next 10–20 days	React (basic → advanced)	Deep expertise in main interview technology
+Weekly ongoing	JS/HTML/CSS quick revision (~2h)	Sharpness and confidence in fundamentals
+🔥 Why This Strategy Works Best:
+Interview Readiness: Most UAE/Dubai frontend jobs focus heavily on React, so mastering it is your highest priority.
+
+Strong Fundamentals: Quickly revising HTML/CSS ensures you confidently handle fundamental questions, which is critical in technical rounds.
+
+Regular Quick Revision: Keeps everything fresh without losing touch on core concepts, making you always interview-ready.
+
+🧠 My Final Recommendation:
+Yes, please spend the next 3 days revisiting HTML/CSS/Flex/Grid first.
+
+After that, shift fully into React for deep learning and practice.
+
+This structured approach is proven effective, making you interview-ready quicker, and dramatically improving your confidence and performance.
+
+Ready to guide you each step of the way!
+You got this, brother! 🚀
