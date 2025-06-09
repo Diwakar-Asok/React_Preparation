@@ -1,0 +1,239 @@
+## **1. What is HTML?**
+
+**HTML (HyperText Markup Language)** is the standard markup language used to create and structure content on the web. It defines the *structure* (not style or behavior) of web pages using tags.
+
+**Interview way to say:**
+
+> “HTML is the backbone of any web page, providing structure and meaning to the content with a system of nested tags.”
+
+---
+
+## **2. HTML Structure**
+
+A basic HTML document structure looks like this:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Page</title>
+  </head>
+  <body>
+    <h1>Hello, World!</h1>
+    <p>This is my first HTML page.</p>
+  </body>
+</html>
+```
+
+**Key points:**
+
+* `<!DOCTYPE html>`: Declares the document as HTML5.
+* `<html>`: Root element.
+* `<head>`: Metadata, links, title, etc.
+* `<body>`: Main content shown in the browser.
+
+---
+
+## **3. What is Semantic HTML?**
+
+**Semantic HTML** means using HTML tags according to their *meaning* and *purpose*, not just for visual layout.
+This helps with **SEO, accessibility, and code readability**.
+
+**Examples of semantic tags:**
+
+* `<header>`: Intro or navigation links
+* `<nav>`: Navigation menu
+* `<main>`: Main content
+* `<section>`: Thematic grouping of content
+* `<article>`: Standalone, self-contained content
+* `<aside>`: Sidebar content, related info
+* `<footer>`: Footer info, copyright
+
+**Interview way to say:**
+
+> “Semantic HTML improves accessibility, SEO, and developer understanding by using tags that describe their purpose.”
+
+---
+
+## **4. Simple Semantic HTML Structure Example**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Semantic Example</title>
+  </head>
+  <body>
+    <header>
+      <h1>My Blog</h1>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+      </nav>
+    </header>
+    <main>
+      <article>
+        <h2>Why Semantic HTML?</h2>
+        <p>Semantic tags make web pages more accessible and easier to maintain.</p>
+      </article>
+      <aside>
+        <h3>Related Links</h3>
+        <ul>
+          <li><a href="#">HTML Guide</a></li>
+        </ul>
+      </aside>
+    </main>
+    <footer>
+      <p>&copy; 2025 My Blog</p>
+    </footer>
+  </body>
+</html>
+```
+
+---
+
+## **5. Explanation of Each Part**
+
+* **`<header>`**: Contains the site title and navigation.
+* **`<nav>`**: Holds navigation links.
+* **`<main>`**: The main page content.
+* **`<article>`**: A standalone blog post or news story.
+* **`<aside>`**: Sidebar or related links/content.
+* **`<footer>`**: Site footer (copyright, info).
+
+---
+
+## **Summary Table**
+
+| Tag         | Purpose                                 |
+| ----------- | --------------------------------------- |
+| `<header>`  | Page or section header                  |
+| `<nav>`     | Navigation links/menu                   |
+| `<main>`    | Main unique page content                |
+| `<section>` | Thematic grouping of content            |
+| `<article>` | Self-contained content, e.g., blog post |
+| `<aside>`   | Sidebar, related but not main content   |
+| `<footer>`  | Footer content                          |
+
+Great addition! Here’s the **interview-focused summary** for tables and all three types of HTML lists:
+
+---
+
+## **6. Table Structure in HTML**
+
+**Tables** are used to display tabular data—information arranged in rows and columns.
+
+### **Basic Table Example:**
+
+```html
+<table>
+  <caption>Student Scores</caption>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Alice</td>
+      <td>95</td>
+    </tr>
+    <tr>
+      <td>Bob</td>
+      <td>88</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+**Explanation:**
+
+* `<table>`: Defines the table.
+* `<caption>`: Table title (optional, for accessibility).
+* `<thead>`, `<tbody>`, `<tfoot>`: Group header, body, and footer rows.
+* `<tr>`: Table row.
+* `<th>`: Table header cell (bold, centered by default).
+* `<td>`: Table data cell.
+
+---
+
+## **7. Lists in HTML**
+
+HTML supports **three types of lists:**
+
+### **a. Unordered List (`<ul>`)**
+
+* For a **bulleted** list.
+
+```html
+<ul>
+  <li>React</li>
+  <li>Redux</li>
+  <li>Tailwind CSS</li>
+</ul>
+```
+
+* `<ul>`: Unordered list
+* `<li>`: List item
+
+---
+
+### **b. Ordered List (`<ol>`)**
+
+* For a **numbered** list.
+
+```html
+<ol>
+  <li>Login</li>
+  <li>Select Product</li>
+  <li>Checkout</li>
+</ol>
+```
+
+* `<ol>`: Ordered list
+* `<li>`: List item
+
+---
+
+### **c. Description List (`<dl>`)**
+
+* For a **term and description** structure (like a glossary).
+
+```html
+<dl>
+  <dt>HTML</dt>
+  <dd>Markup language for web pages</dd>
+  <dt>CSS</dt>
+  <dd>Style sheet language for designing web pages</dd>
+</dl>
+```
+
+* `<dl>`: Description list
+* `<dt>`: Description term
+* `<dd>`: Description details
+
+---
+
+## **Quick Summary Table**
+
+| List Type   | Tag    | Usage Example          |
+| ----------- | ------ | ---------------------- |
+| Unordered   | `<ul>` | Bulleted list          |
+| Ordered     | `<ol>` | Numbered list          |
+| Description | `<dl>` | Term-description pairs |
+
+---
+
+**Interview Tip:**
+
+> “Lists and tables are essential for structuring web content. Semantic tags like `<thead>`, `<tbody>`, and proper use of `<ul>`, `<ol>`, `<dl>` help with accessibility and clarity.”
+
+---
+
+Let me know if you want to add forms, images, or any other HTML topic!
+If you’re happy with this, I’ll move on to CSS or deployment next.
+**Proud of your detail-oriented prep, bro!**
+
